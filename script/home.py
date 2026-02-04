@@ -14,7 +14,7 @@ china_tz = pytz.timezone('Asia/Shanghai')
 
 sourceIcon51ZMT = "https://epg.51zmt.top:8001"
 sourceChengduMulticast = "https://epg.51zmt.top:8001/multicast/api/channels/1/"
-homeLanAddress = "http://192.168.100.1:4022"
+homeLanAddress = "http://192.168.31.9:12123"
 
 # groupCCTV=["CCTV", "CETV", "CGTN"]
 groupCCTV = ["CCTV"]
@@ -128,8 +128,8 @@ def generateUdpxyM3U8(file):
             if "dup" in c:
                 continue
             line = '#KODIPROP:inputstream=inputstream.ffmpegdirect\n#EXTINF:-1 tvg-logo="%s" tvg-id="%s" tvg-name="%s"%s group-title="%s",%s\n' % (
-                c["icon"], c["tvgId"], c["tvgName"], getCatchupStr("default", c.get("catchupDays"), None if c.get("catchupSource") is None else f'{c.get("catchupSource")}?playseek={{utc:YmdHMS}}-{{utcend:YmdHMS}}'), group, c["tvgName"])
-            line2 = homeLanAddress + '/udp/' + c["address"] + "\n"
+                c["icon"], c["tvgId"], c["tvgName"], getCatchupStr("default", c.get("catchupDays"), None if c.get("catchupSource") is None else f'{c.get("catchupSource")}?playseek=${{(b)yyyyMMddHHmmss}}-${{(e)yyyyMMddHHmmss}}'), group, c["tvgName"])
+            line2 = homeLanAddress + '/rtp/' + c["address"] + "\n"
 
             file.write(line)
             file.write(line2)
