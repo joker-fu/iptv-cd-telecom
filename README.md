@@ -1,3 +1,5 @@
+**自用，下方源链接，不保证可用，关注源仓库吧！**
+
 # 🎬 成都/四川电信 IPTV 直播源
 
 ![badge](https://github.com/suzukua/iptv-cd-telecom/actions/workflows/cloudflare-pages.yml/badge.svg)

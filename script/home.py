@@ -86,6 +86,7 @@ def loadIcon():
 rtsp_cannot_play = []
 
 def generateM3U8(file):
+    os.makedirs(os.path.dirname(file), exist_ok=True)
     file = open(file, "w", encoding='utf-8')
     name = '成都电信IPTV - ' + datetime.now(china_tz).strftime("%Y-%m-%d %H:%M:%S")
     # title = f'#EXTM3U name="{name}"' + ' x-tvg-url="https://epg.erw.cc/all.xml.gz" url-tvg="http://epg.51zmt.top:8000/e.xml.gz"\n'
@@ -114,6 +115,7 @@ def generateM3U8(file):
     print("Build m3u8 success.")
 
 def generateUdpxyM3U8(file):
+    os.makedirs(os.path.dirname(file), exist_ok=True)
     file = open(file, "w", encoding='utf-8')
     name = '成都电信IPTV - ' + datetime.now(china_tz).strftime("%Y-%m-%d %H:%M:%S")
     # title = f'#EXTM3U name="{name}"' + ' x-tvg-url="https://epg.erw.cc/all.xml.gz" url-tvg="http://epg.51zmt.top:8000/e.xml.gz"\n'
