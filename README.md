@@ -80,7 +80,8 @@ https://iptv.zsdc.eu.org/udpxy/192.168.100.2:4022?fcc=182.139.234.40:8027&rtspPr
 > - 回看时间参数格式：`playseek=${(b)yyyyMMddHHmmss}-${(e)yyyyMMddHHmmss}`
 > - FCC 服务器地址列表：[查看更多](https://github.com/stackia/rtp2httpd/blob/main/docs/cn-fcc-collection.md)
 > - `rtspProxy` 支持 HTTP/HTTPS 协议，可指定 `rtspProxy=https://192.168.100.2:4022`
-> - r2hToken参数说明：[查看更多](https://github.com/stackia/rtp2httpd/blob/main/docs/configuration.md#%E5%AE%89%E5%85%A8%E6%8E%A7%E5%88%B6)
+> - r2hToken参数说明：[r2h-token](https://github.com/stackia/rtp2httpd/blob/main/docs/configuration.md#%E5%AE%89%E5%85%A8%E6%8E%A7%E5%88%B6)
+
 ---
 
 ## 📺 EPG 电子节目单
