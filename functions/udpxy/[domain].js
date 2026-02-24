@@ -15,35 +15,37 @@ export async function onRequest(context) {
     m3uText = m3uText.replaceAll("192.168.100.1:4022", context.params.domain)
 
     const fcc = url.searchParams.get("fcc")
-    if (fcc) {
-        let lines = m3uText.split("\n")
-        lines.forEach(function(line,index){
-            if (line.indexOf("/udp/") > 0) {
-                let url = new URL(line)
-                if (url.searchParams.size > 0){
-                    line += `&fcc=${fcc}`
-                } else {
-                    line += `?fcc=${fcc}`
-                }
-                lines[index] = line;
-            }
-        })
-        m3uText = lines.join("\n")
-    }
+    const r2hToken = url.searchParams.get("r2hToken")
 
     let rtspProxy = url.searchParams.get("rtspProxy")
-    if (rtspProxy) {
-        if (!rtspProxy.startsWith("http")) {
-            rtspProxy = `http://${rtspProxy}`;
-        }
-        let lines = m3uText.split("\n")
-        lines.forEach(function(line,index){
-            if (line.indexOf("catchup-source=\"rtsp://") > 0) {
-                lines[index] = line.replaceAll("catchup-source=\"rtsp://", `catchup-source="${rtspProxy}/rtsp/`);
-            }
-        })
-        m3uText = lines.join("\n")
+    if (rtspProxy && !rtspProxy.startsWith("http")) {
+        rtspProxy = `http://${rtspProxy}`;
     }
+
+    let lines = m3uText.split("\n")
+    lines.forEach(function(line,index){
+        if (fcc && line.indexOf("/udp/") > 0) {
+            let url = new URL(line)
+            line = (line += `${url.searchParams.size > 0 ? '&' : '?'}fcc=${fcc}`);
+            if (r2hToken) {
+                url = new URL(line)
+                line = (line += `${url.searchParams.size > 0 ? '&' : '?'}r2h-token=${r2hToken}`);
+            }
+        }
+        if (rtspProxy && line.indexOf("catchup-source=\"rtsp://") > 0) {
+            line = line.replaceAll("catchup-source=\"rtsp://", `catchup-source="${rtspProxy}/rtsp/`);
+            if (r2hToken) {
+                const match = line.match(/catchup-source="([^"]+)"/);
+                if (match) {
+                    let url = new URL(match[1]);
+                    let tmp = `${match[1]}${url.searchParams.size > 0 ? '&' : '?'}r2h-token=${r2hToken}`;
+                    line = line.replaceAll(match[1], tmp);
+                }
+            }
+        }
+        lines[index] = line;
+    })
+    m3uText = lines.join("\n")
 
     return new Response(m3uText);
 }
