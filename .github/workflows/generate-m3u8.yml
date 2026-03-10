@@ -35,6 +35,11 @@ jobs:
         run: |
           python3 ./script/home.py
 
+      - name: Auto update README date and channel count
+        run: |
+          DATE=$(date "+%Y-%m-%d %H:%M:%S")
+          CHANNEL_COUNT=$(grep -c '^#EXTINF:' home/iptv.m3u8)
+          sed -i "s/📅 更新时间：.* | 共 [0-9]\+ 条频道信息/📅 更新时间：$DATE | 共 $CHANNEL_COUNT 条频道信息/" README.md
 
       - name: Commit
         run: |
