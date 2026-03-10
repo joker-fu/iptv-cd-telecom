@@ -38,8 +38,8 @@ jobs:
       - name: Auto update README date and channel count
         run: |
           DATE=$(date "+%Y-%m-%d %H:%M:%S")
-          CHANNEL_COUNT=$(grep -c '^#EXTINF:' home/iptv.m3u8)
-          sed -i "/更新时间/s/.*/📅 更新时间：$DATE | 共 $CHANNEL_COUNT 条频道信息/" README.md
+          CHANNEL_COUNT=$(grep -c '^#EXTINF:' home/udpxy_iptv.m3u8)
+          sed -i "/更新时间/s/.*/📅 更新时间：$DATE | udpxy_iptv 共 $CHANNEL_COUNT 条频道信息/" README.md
 
       - name: Commit
         run: |
