@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 > 📺 **IPTV 机顶盒替代方案** | 支持回看、时移 | 每周不定时更新  
-📅 更新时间：2026-04-27 13:28:45 | udpxy_iptv 共 158 条频道信息
+📅 更新时间：2026-04-30 15:21:52 | udpxy_iptv 共 158 条频道信息
 
 ---
 
